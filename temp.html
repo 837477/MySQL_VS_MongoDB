@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+	<script>
+		ajax_ = $.ajax({
+	        type: "GET",
+	        url: "http://localhost:5000/test",
+	        dataType : "json",
+	        success: function(res){
+	        },
+	        error: function(res){
+       		}
+    	});
+		
+		function Sort_int(a, b){ 
+			if(a.rand_num == b.rand_num){
+				return 0
+			} 
+			return a.rand_num > b.rand_num ? 1 : -1;
+		}
+		function Sort_string(a, b){ 
+			if(a.title == b.title){
+				return 0
+			} 
+			return a.title > b.title ? 1 : -1;
+		} 
+		function Sort_date(a, b){ 
+			if(a.date == b.date){
+				return 0
+			} 
+			return a.date > b.date ? 1 : -1;
+		} 
+
+		function sort_test(){
+			var startTime = new Date().getTime()
+			sort_result = ajax_.responseJSON['DataSet'].sort(Sort_int);
+			var endTime = new Date().getTime();
+			console.log('INT sort 소요시간 :', endTime - startTime);
+
+			var startTime = new Date().getTime()
+			sort_result = ajax_.responseJSON['DataSet'].sort(Sort_string);
+			var endTime = new Date().getTime();
+			console.log('String sort 소요시간 :', endTime - startTime);
+
+			var startTime = new Date().getTime()
+			sort_result = ajax_.responseJSON['DataSet'].sort(Sort_date);
+			var endTime = new Date().getTime();
+			console.log('Date sort 소요시간 :', endTime - startTime);
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+
+</html>
